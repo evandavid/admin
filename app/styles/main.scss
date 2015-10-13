@@ -1,0 +1,231 @@
+@import 'variables';
+
+body {
+  background: $body_background;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: $header_background;
+  line-height: 10px;
+  z-index: 2;
+
+  .title {
+    padding: 18px 5px;
+    float: left;
+    width: 180px;
+    background: $header_title_background;
+    height: 50px;
+    color: $header_title_color;
+    font-size: 24px;
+    font-weight: bolder;
+    padding-left: 45px;
+    line-height: 14px;
+    border-bottom: 1px solid lighten($header_title_background, 10%);
+    .simplefi-icon {
+      content: " ";
+      color: $header_title_background;
+      background: $header_title_background;
+      border: 18px solid $header_title_color;
+      border-radius: 28px;
+      display: block;
+      position: absolute;
+      left: 5px;
+      top: 6px;
+      &:after {
+        content: "n ";
+        display: block;
+        position: absolute;
+        height: 12px;
+        color: #333;
+        top: -6px;
+        left: -6px;
+        width: 12px;
+        font-size: 0px;
+        background: $header_title_background;
+      }
+    }
+  }
+
+  .menu {
+    padding: 18px 5px 18px 10px;
+    float: left;
+    i.fa-outdent {
+      cursor: pointer;
+    }
+  }
+
+  &:after {
+    content: " ";
+    clear: both;
+  }
+}
+
+.body-content {
+  margin-top: 50px;
+
+  .sidebar {
+    background: $sidebar_background;
+    width: 210px;
+    color: $sidebar_color;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    font-size: 13px;
+    & > li {
+      padding: 18px 0;
+      cursor: pointer;
+      &:hover, &.active {
+        background: darken($sidebar_background, 10%);
+      }
+      &.has-child{
+        padding-bottom: 0;
+      }
+      i {
+        margin-right: 10px;
+        margin-left: 22px;
+      }
+
+      ul {
+        padding-left: 0;
+        li {
+          padding: 18px 0px;
+          padding-left: 45px;
+          &:hover {
+            background: darken($sidebar_background, 15%);
+          }
+        }
+        list-style: none;
+        li:first-child {
+          margin-top: 16px;
+        }
+      }
+    }
+
+
+    // iconic
+    &.iconic {
+      width: 60px;
+      .item, ul {
+        position: absolute;
+      }
+      .item {
+        width: 0;
+        opacity: 0;
+        padding: 18px 0 18px 20px;
+        top: 0;
+        background-color: darken($sidebar_background, 10%);
+        margin-left: 60px;
+        z-index: 10;
+        display: block;
+      }
+      & > li {
+        position: relative;
+        width: 60px;
+        i {
+          margin-left: 22px;
+        }
+        .item {
+          width: 0;
+          overflow: scroll;
+          padding: 0px;
+        }
+        &.has-child{
+          padding-bottom: 18px;
+        }
+
+        ul {
+          z-index: 20;
+          margin-left: 60px;
+          margin-top: 2px;
+          li {
+            padding: 0;
+            &:hover  {
+              background: transparent;
+            }
+            .item {
+              margin-left: 0px;
+              position: relative;
+            }
+          }
+        } 
+
+        &:hover { 
+          .item {
+            width: 170px;
+            padding: 18px 0 18px 20px;
+            margin-left: 60px;
+            overflow: hidden;
+            opacity: 1;
+          }
+          ul {
+            .item {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+@mixin mobile {
+  
+}
+
+// media queries 
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  @include mobile;
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  @include mobile;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  @include mobile;
+}
+
+/* iPhone 5 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  @include mobile;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  @include mobile;
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  @include mobile;
+}
+
+/* Samsung Galaxy S4 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+  @include mobile;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  @include mobile;
+}
+
+/* Samsung Galaxy S5 ----------- */
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+  @include mobile;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  @include mobile;
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-height: 960px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  @include mobile;
+}
