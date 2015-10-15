@@ -19,7 +19,10 @@
   <body ng-app="simplefiAdminApp" class="l-dashboard">
     <ng-include src="'views/partials/header.html'" scope="" onload=""></ng-include>
     <div class="body-content">
-      <ng-include src="'views/partials/sidebar.html'" scope="" onload=""></ng-include>
+      <ul class="sidebar iconic" ng-include src="'views/partials/sidebar.html'" scope="" onload=""></ul>
+      <!-- this is the main view -->
+      <div class="main-content" data-ui-view="">
+      </div>
     </div>
 
 

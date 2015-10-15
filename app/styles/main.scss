@@ -2,6 +2,7 @@
 
 body {
   background: $body_background;
+  overflow-x: hidden;
 }
 
 nav {
@@ -76,13 +77,19 @@ nav {
     padding-left: 0;
     list-style: none;
     font-size: 13px;
+    z-index: 10;
     & > li {
       padding: 18px 0;
       cursor: pointer;
       &:hover, &.active {
         background: darken($sidebar_background, 10%);
       }
-      &.has-child{
+      &.active {
+        ul {
+          display: block;
+        }
+      }
+      &.has-child.active{
         padding-bottom: 0;
       }
       i {
@@ -92,6 +99,7 @@ nav {
 
       ul {
         padding-left: 0;
+        display: none;
         li {
           padding: 18px 0px;
           padding-left: 45px;
@@ -110,8 +118,14 @@ nav {
     // iconic
     &.iconic {
       width: 60px;
+
+      & + .main-content {
+        margin-left: 70px;
+      }
+
       .item, ul {
         position: absolute;
+        z-index: 1000;
       }
       .item {
         width: 0;
@@ -142,6 +156,7 @@ nav {
           z-index: 20;
           margin-left: 60px;
           margin-top: 2px;
+          display: block;
           li {
             padding: 0;
             &:hover  {
@@ -171,13 +186,207 @@ nav {
       }
     }
   }
+  .main-content {
+    border: 1px solid #ddd;
+    margin-left: 220px;
+    margin-right: 10px;
+    margin-top: 60px;
+    background: #fff;
+
+    .left-content {
+      border-right: 1px solid #ddd;
+      padding: 10px 10px 10px 25px;
+    }
+
+    .workspace {
+      padding: 10px;
+      .filter-detail {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-right: 18px;
+        .name {
+          font-size: 16px;
+          font-weight: bold;
+          padding: 5px 0 5px 10px;
+          border: 1px solid transparent;
+
+          &:focus {
+            border: 1px solid #aaa;
+            outline: none;
+          }
+        }
+        .btn {
+          border-radius: 0;
+          padding: 4px 25px;
+          font-size: 12px;
+          font-weight: bold;
+          background: $sidebar_background;
+          color: $sidebar_color;
+        }
+        .favorite {
+          margin: 0 6px;
+          cursor: pointer;
+        }
+      }
+
+      .filter-items {
+        padding: 10px 0 15px;
+        border-bottom: 1px solid #ddd ;
+        .item {
+          float: left;
+          margin-right: 5px;
+          border: 1px solid #aaa;
+          padding: 3px 15px;
+          height: 30px;
+          margin-top: 5px;
+          &.small {
+            select, input[type="text"] {
+              width: 80px;
+              height: 100%;
+            }
+          }
+          &.dropdown {
+            min-width: 170px;
+            &.small {
+              min-width: 155px;
+              .dropdown .btn {
+                min-width: 155px;
+              }
+            }
+          }
+          &.action {
+            background: $sidebar_background;
+            width: 55px;
+            color: $sidebar_color;
+          }
+          select.filter-item, input[type="text"].filter-item {
+            border: none;
+            background: #fff;
+            min-width: 90px;
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .checkbox {
+            margin-top: 1px;
+          }
+
+          .btn {
+            background: transparent;
+            position: absolute;
+            margin-top: -5px;
+            margin-left: -10px;
+            &:hover {
+              color: #fff;
+            }
+            &:focus {
+              color: #fff;
+              outline: none;
+            }
+          }
+
+          .dropdown .btn{
+            min-width: 180px;
+            border: none;
+            margin-left: -20px;
+            text-align: left;
+            span.caret {
+              float: right;
+              margin-top: 9px;
+              margin-right: 10px;
+            }
+            &:focus, &:hover {
+              color: #333;
+            }
+          }
+
+          .dropdown-menu {
+            margin-top: 25px;
+            margin-left: -16px;
+            width: 180px;
+            border-radius: 0;
+            &.large {
+              width: 215px;
+            }
+          }
+
+          input.search-dropdown {
+            width: 100%;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            padding: 5px 10px;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+
+      .search-result {
+        margin-top: 20px;
+        .actions {
+          .item {
+            float: left;
+            margin-right: 10px;
+            &.checkbox {
+              margin-top: 0;
+            }
+            select, button {
+              background: #fff;
+              border: 1px solid #aaa;
+              height: 20px;
+              outline: none;
+            }
+          }
+        }
+        .result {
+          clear: both;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          .item {
+            border-bottom: 1px solid #ddd;
+            padding: 6px 0;
+          }
+        }
+      }
+    }
+
+    .extra-menus {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+      &:last-child {
+        border-bottom: none;
+      }
+      .item {
+        font-weight: bold;
+        font-size: 11px;
+        cursor: pointer;
+        margin-bottom: 5px;
+        color: $sidebar_background;
+        &.header {
+          color: #333;
+          cursor: default;
+          font-weight: normal;
+          font-size: 16px;
+          margin-bottom: 10px;
+        }
+        &.btn {
+          background: $sidebar_background;
+          color: $sidebar_color;
+          border-radius: 0;
+        }
+      }
+    }
+  }
 }
 
 
 
 
 @mixin mobile {
-  
+    
 }
 
 // media queries 

@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-lg-2 col-md-3 col-sm-4 left-content">
+    <div class="extra-menus">
+      <div class="item header">Filters</div>
+      <div class="item btn">New Filter</div>
+    </div>
+
+    <div class="extra-menus">
+      <div class="item header">Quick Filters</div>
+      <div class="item">All Applications</div>
+      <div class="item">All Submited Applications</div>
+      <div class="item">All In Progress Applications</div>
+      <div class="item">My Applications</div>
+      <div class="item">My Favorite Applications</div>
+      
+    </div>
+
+    <div class="extra-menus">
+      <div class="item header">Favorite Filters</div>
+      <div class="item">Custom Filter</div>
+    </div>
+
+    <div class="extra-menus">
+      <div class="item header">Saved Filters</div>
+      <div class="item">Custom Filter</div>
+    </div>
+  </div>
+  <div class="col-lg-10 col-md-9 col-sm-8 workspace">
+    <div class="filter-detail">
+      <input type="text" value="All Applications" auto-size class="name">
+      <span class="favorite glyphicon favourite-icon glyphicon-star-empty" data-ng-class="{'glyphicon-star' : vm.selectedFilter.Header.IsFavorite, 'glyphicon-star-empty' : !vm.selectedFilter.Header.IsFavorite}"></span>
+      <button class="btn">Save</button>
+    </div>
+    <div class="filter-items">
+      <div class="item">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Favorite
+          </label>
+        </div>
+      </div>
+      <div class="item dropdown">
+        <div dropdown data="vm.applicationType" ng-model="vm.filter.applicationType" ></div>
+      </div>
+      <div class="item small">
+        <input type="text" placeholder="Name" class="filter-item" />
+      </div>
+      <div class="item small">
+        <input type="text" placeholder="SSN" class="filter-item" />
+      </div>
+      <div class="item small">
+        <input type="text" placeholder="Phone" class="filter-item" />
+      </div>
+      <div class="item small">
+        <input type="text" placeholder="Start date" class="filter-item" />
+      </div>
+      <div class="item dropdown">
+        <div dropdown-search data="vm.usersList" ng-model="vm.filter.users" ></div>
+      </div>
+      <div class="item small action">
+        <button class="btn"> 
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </div>
+      <br style="clear:both" />
+    </div>
+
+    <div class="row search-result">
+      <div class="col-lg-4 col-md-5 col-sm-6">
+        <div class="actions">
+          <div class="item checkbox">
+            <label>
+              <input type="checkbox"> Check all
+            </label>
+          </div>
+          <div class="item">
+            <span><b>Sort By</b></span>
+            <select>
+              <option>Submit date</option>
+              <option>First name</option>
+            </select>
+          </div>
+          <div class="item">
+              <button>
+                <span class="glyphicon glyphicon-chevron-up" data-ng-class="{'glyphicon-chevron-down': reverse,'glyphicon-chevron-up': !reverse}"></span>
+              </button>
+          </div>
+        </div>
+        <div class="result" >
+          <div class="item" ng-repeat="n in [] | range:100">
+            <div class="row">
+              <div class="col-sm-2">
+                f
+              </div>
+              <div class="col-sm-5">t</div>
+              <div class="col-sm-5">t</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-7 col-sm-6">test</div>
+    </div>
+  </div>
+</div>
