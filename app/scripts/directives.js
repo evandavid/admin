@@ -15,18 +15,63 @@ angular
         restrict: 'A',
         link: function(scope, elem){
             elem.bind('click', function(){
-                jQuery('.sidebar').toggleClass('iconic');
+                jQuery('.sidebar').toggleClass('iconic').toggleClass('active');
             })
         }
     };
 })
-.directive('result', function ($window) {
+.directive('searchResult', function ($window) {
     return {
         restrict: 'C',
         link: function(scope, elem){
-            var xHeight = $window.innerHeight - 277;
-            if (xHeight < 400) { xHeight = $window.innerHeight; }
-            elem.css('height', xHeight+'px');
+            var xHeight = $window.innerHeight - 230;
+            if (xHeight < 300) { xHeight = $window.innerHeight; }
+            elem.css('min-height', xHeight+'px');
+        }
+    };
+})
+.directive('pikaday', function () {
+    return {
+        restrict: 'C',
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModel) {
+            var thisDay = new Date();
+            new Pikaday({
+                field: jQuery(element)[0],
+                format: 'MM/DD/YYYY',
+                yearRange: [1960, (thisDay.getUTCFullYear()+20)],
+                onSelect: function() {
+                    ngModel.$setViewValue(this.getMoment().format('MM/DD/YYYY'));
+                }
+            });
+        }
+    };
+  })
+.directive('filterItem', function ($window) {
+    return {
+        restrict: 'C',
+        link: function(scope, elem){
+            elem.bind('click', function(){
+                var input = jQuery(elem).find('input');
+                if (input){
+                    input.focus();
+                }
+            });
+        }
+    };
+})
+.directive('dateRemove', function ($window) {
+    return {
+        restrict: 'C',
+        link: function(scope, elem){
+            elem.bind('click', function(){
+                var xinput   = jQuery(elem).prev();
+                if (xinput){
+                    var angInput = angular.element(xinput).data('$ngModelController')
+                    angInput.$setViewValue(null);
+                    xinput.val('')
+                }
+            });
         }
     };
 })
@@ -49,6 +94,65 @@ angular
                 jQuery(elem).attr('size', (jQuery(elem).val().length - 5));
             }
             jQuery(elem).keyup(resizeInput).each(resizeInput);
+        }
+    };
+})
+.directive('tableRow', function () {
+    return {
+        restrict: 'A',
+        link: function(scope, elem){
+            elem.bind('click', function(){
+                var parent = jQuery(elem).parent();
+                jQuery(parent).find('.detail').toggleClass('active')
+                            .prev().find('span')
+                                   .toggleClass('glyphicon-minus')
+                                   .toggleClass('glyphicon-plus');
+
+                var siblings = jQuery(parent).siblings();
+                for (var i = 0; i < siblings.length; i++) {
+                    jQuery(siblings[i]).find('.detail').removeClass('active')
+                                       .prev().find('span')
+                                              .addClass('glyphicon-plus')
+                                              .removeClass('glyphicon-minus');
+                };
+            });
+        }
+    };
+})
+.directive('fullscreen', function () {
+    return {
+        restrict: 'A',
+        link: function(scope, elem){
+            elem.bind('click', function(){
+                var modal = jQuery('#application-detail');
+                var modalContent = modal.find('.modal-body');
+                modalContent.html('');
+                var content = jQuery(elem).parent().parent().parent().parent();
+                modalContent.html(content.html());
+            });
+        }
+    };
+})
+.directive('sortableRow', function () {
+    return {
+        restrict: 'A',
+        link: function(scope, elem){
+            var holder = '<div class="pull-right"><i class="fa fa-sort"></i></div>';
+            jQuery(elem).append(holder).addClass('sortable');
+            elem.bind('click', function(){
+                var others    = jQuery('.sortable').not(this);
+                for (var i = 0; i < others.length; i++) {
+                    var _theHolder = jQuery(others[i]).find('.pull-right').find('i');
+                        _theHolder.addClass('fa-sort').removeClass('fa-sort-desc').removeClass('fa-sort-asc');
+                }
+
+                var theHolder = jQuery(elem).find('.pull-right').find('i');
+                if (!theHolder.hasClass('fa-sort-asc')){
+                    theHolder.addClass('fa-sort-asc').removeClass('fa-sort-desc');
+                }else{
+                    theHolder.addClass('fa-sort-desc').removeClass('fa-sort-asc');
+                }
+            });
         }
     };
 })
@@ -110,7 +214,7 @@ angular
         scope: { data: '='},
         require: 'ngModel',
         template: '<div class="dropdown">\
-                    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{getView}}\
+                    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style="font-size:11px"></span> {{getView}}\
                     <span class="caret"></span></button>\
                     <ul class="dropdown-menu large" role="menu" aria-labelledby="menu1">\
                       <li role="presentation"><input type="text" class="search-dropdown" placeholder="Search" ng-model="xfilter" ng-change="filterData()"></li>\

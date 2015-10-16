@@ -32,73 +32,224 @@
       <button class="btn">Save</button>
     </div>
     <div class="filter-items">
-      <div class="item">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Favorite
-          </label>
-        </div>
+      <div class="item filter-item">
+        <label>Favorite</label>
+        <div dropdown data="vm.yesNo" ng-model="vm.filter.applicationType" ></div>
       </div>
-      <div class="item dropdown">
+      <div class="item filter-item">
+        <label>Application Status</label>
         <div dropdown data="vm.applicationType" ng-model="vm.filter.applicationType" ></div>
       </div>
-      <div class="item small">
+      <div class="item filter-item">
+        <label>Name</label>
         <input type="text" placeholder="Name" class="filter-item" />
       </div>
-      <div class="item small">
+      <div class="item filter-item">
+        <label>SSN</label>
         <input type="text" placeholder="SSN" class="filter-item" />
       </div>
-      <div class="item small">
+      <div class="item filter-item">
+        <label>Phone</label>
         <input type="text" placeholder="Phone" class="filter-item" />
       </div>
-      <div class="item small">
-        <input type="text" placeholder="Start date" class="filter-item" />
+      <div class="item filter-item">
+        <label>Start date</label>
+        <input type="text" placeholder="Start date" class="filter-item pikaday" x-ng-model="test" readonly="" />
+        <span aria-hidden="true" class="glyphicon red glyphicon-remove date-remove"></span>
       </div>
-      <div class="item dropdown">
+      <div class="item filter-item">
+        <label>Assign</label>
         <div dropdown-search data="vm.usersList" ng-model="vm.filter.users" ></div>
       </div>
-      <div class="item small action">
-        <button class="btn"> 
-          <span class="glyphicon glyphicon-search"></span>
-        </button>
+      <div class="item action filter-item">
+      <label>&nbsp;</label>
+        <button><span aria-hidden="true" class="glyphicon glyphicon-plus"></span></button>        
       </div>
-      <br style="clear:both" />
+      <div class="item action filter-item">
+      <label>&nbsp;</label>
+        <button><span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>        
+      </div>
     </div>
 
     <div class="row search-result">
-      <div class="col-lg-4 col-md-5 col-sm-6">
-        <div class="actions">
-          <div class="item checkbox">
-            <label>
-              <input type="checkbox"> Check all
-            </label>
-          </div>
-          <div class="item">
-            <span><b>Sort By</b></span>
-            <select>
-              <option>Submit date</option>
-              <option>First name</option>
-            </select>
-          </div>
-          <div class="item">
-              <button>
-                <span class="glyphicon glyphicon-chevron-up" data-ng-class="{'glyphicon-chevron-down': reverse,'glyphicon-chevron-up': !reverse}"></span>
-              </button>
-          </div>
-        </div>
-        <div class="result" >
-          <div class="item" ng-repeat="n in [] | range:100">
-            <div class="row">
-              <div class="col-sm-2">
-                f
+      <div class="col-md-12">
+        <div class="as-table">
+          <div class="row header">
+            <div class="col-xs-4">
+              <div class="row">
+                <div class="col-xs-2">
+                  <label>
+                    <input type="checkbox">
+                  </label>
+                </div>
+                <div class="col-xs-10" x-sortable-row>
+                  Name
+                </div>
               </div>
-              <div class="col-sm-5">t</div>
-              <div class="col-sm-5">t</div>
+            </div>
+            <div class="col-xs-2">
+              Application Number
+            </div>
+            <div class="col-xs-2">
+              Assign
+            </div>
+            <div class="col-xs-2" x-sortable-row>
+              Submit Date
+            </div>
+          </div>
+          <!-- this is table body -->
+          <div  class="row rows" ng-repeat="n in [] | range:100">
+            <div x-table-row class="col-xs-4">
+              <div class="row">
+                <div class="col-xs-2">
+                  <label>
+                    <input type="checkbox">
+                  </label>
+                </div>
+                <div class="col-xs-10">
+                  <b>This example name</b>
+                </div>
+              </div>
+            </div>
+            <div x-table-row class="col-xs-2">
+              <b>Application Number</b>
+            </div>
+            <div x-table-row class="col-xs-2">
+              Assign
+            </div>
+            <div x-table-row class="col-xs-2">
+              2015-07-01 15:16:53
+            </div>
+            <div x-table-row class="col-xs-2">
+              <div class="pull-right">
+                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+              </div>
+            </div>
+            <div class="col-xs-12 detail">
+              <div class="header">
+                <h4>This example name</h4>
+                <div class="pull-right">
+                  <div><button><span class="glyphicon glyphicon-comment"></span> Comment</button></div>
+                  <div dropdown-search data="vm.usersList" ng-model="vm.filter.users" ></div>
+                  <div>
+                    <div class="dropdown">                    
+                      <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                        Action <span class="caret"></span>
+                      </button>                   
+                      <ul class="dropdown-menu large" role="menu" aria-labelledby="menu1">
+                        <li role="presentation">
+                          <a style="cursor:pointer;outline:none" role="menuitem" tabindex="-1">
+                            David de Gea
+                          </a>
+                        </li>
+                      </ul>                  
+                    </div>
+                  </div>
+                  <div><button x-fullscreen data-toggle="modal" data-target="#application-detail"><span class="glyphicon glyphicon-fullscreen"></span></button></div>
+                </div>
+              </div>
+              <!-- this is detail view -->
+              <div class="row">
+                <div class="col-lg-4 col-md-5">
+                  <div><b>222-222-222</b> <a href="">show</a></div>
+                  <div>test@email.com</div>
+                  <div><b>(+1) (212) 121-2121</b> Afternoon, Mountain Time</div>
+                  <div><b>Birth Date:</b> Aug 1, 1965</div>
+                  <div><b>Citizenship:</b> U.S. Citizen</div>
+                </div>
+                <div class="col-lg-4 col-md-5">
+                  <div>1-20150906-141 (In Progress, Application Review)</div>
+                  <div><b>Start Date:</b> Sep 07, 2015 09:06:33</div>
+                  <div><b>Submit Date:</b> </div>
+                  <div><b>Driver's License:</b> Alabama  • 234234234234234  • Oct 05, 2017</div>
+                  <div><b>Income:</b> $587,200.00</div>
+                  <div><b>Term:</b> 10 Years</div>
+                </div>
+                <div class="col-md-12">
+                  <div><b>School:</b> STANFORD UNIVERSITY • Master's • 2012 • History of Architecture (transfer students only)</div>
+                </div>
+                <br />
+                <div class="col-md-12 tabs">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href=".eligiblity-m-{{n}}">Eligibility &amp; Disclosures</a></li>
+                    <li class=""><a data-toggle="tab" href=".personal-m-{{n}}">Personal Info</a></li>
+                    <li class=""><a data-toggle="tab" href=".academic-m-{{n}}">Academic</a></li>
+                    <li class=""><a data-toggle="tab" href=".employment-m-{{n}}">Employment</a></li>
+                    <li class=""><a data-toggle="tab" href=".loaninfo-m-{{n}}">Loan Info</a></li>
+                    <li class=""><a data-toggle="tab" href=".loanterm-m-{{n}}">Income/Expenses</a></li>
+                    <li class=""><a data-toggle="tab" href=".documentation-m-{{n}}">Document</a></li>
+                    <li class=""><a data-toggle="tab" href=".reference-m-{{n}}">Reference</a></li>
+                  </ul>
+                 
+
+                  <div class="tab-content">
+                    <div class="eligiblity-m-{{n}} tab-pane fade in active">
+                      <h5>Eligibility</h5>
+                      <div class="row">
+                        <div class="col-sm-7 col-lg-5 col-md-7 uncondensed-column">
+                          <div>Are you looking to refinance and consolidate your student loan debts?</div>
+                          <div>Are you looking for a loan to pay for college?</div>
+                          <div>Do you have a master's degree or higher?</div>
+                          <div>Graduate School Name:</div>
+                          <div>Do you have a undergraduate degree?</div>
+                          <div>Undergraduate School Name:</div>
+                          <div>Are you currently employed?</div>
+                          <div>What is your current zip code?</div>
+                        </div>
+                        <div class="col-sm-5 col-lg-4 col-md-5 uncondensed-column">
+                          <div>Yes</div>
+                          <div>Yes</div>
+                          <div>Yes</div>
+                          <div>STANFORD UNIVERSITY</div>
+                          <div>Yes</div>
+                          <div>STANFORD UNIVERSITY</div>
+                          <div>Yes</div>
+                          <div>08852</div>
+                        </div>
+                      </div>
+                      <h5>TB&T Disclosure(s)</h5>
+                      <div class="row">
+                        <div class="col-sm-7 col-lg-5 col-md-7 uncondensed-column">
+                          <div>Application and Solicitation Disclosure</div>
+                          <div>Privacy Policy</div>
+                          <div>Electronic Communications Policy and Consent-Diclosure</div>
+                        </div>
+                        <div class="col-sm-5 col-lg-4 col-md-5 uncondensed-column">
+                          <div>Agreed  • Sep 06, 2015  • <a>Download File</a></div>
+                          <div>Agreed  • Sep 06, 2015  • <a>Download File</a></div>
+                          <div>Agreed  • Sep 06, 2015  • <a>Download File</a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="personal-m-{{n}} tab-pane fade">
+                      <h3>Menu 1</h3>
+                      <p>Some content in menu 1.</p>
+                    </div>
+                    <div id="menu2s" class="tab-pane fade">
+                      <h3>Menu 2</h3>
+                      <p>Some content in menu 2.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-8 col-md-7 col-sm-6">test</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- expand modal for detail view -->
+<div id="application-detail" class="modal fade large-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

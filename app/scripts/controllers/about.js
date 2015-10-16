@@ -11,6 +11,14 @@ angular.module('simplefiAdminApp')
   .controller('ApplicationSearchCtrl', function () {
     var vm = this;
 
+    vm.yesNo = [{
+    	id: true,
+    	name: 'Yes'
+    }, {
+    	id: false,
+    	name: 'No'
+    }];
+
     vm.applicationType = [{
     	id: null,
     	name: 'Application Status'
@@ -32,7 +40,7 @@ angular.module('simplefiAdminApp')
     	id: 2,
     	name: 'Wayne Rooney'
     },{
-    	id: 2,
+    	id: 3,
     	name: 'Ander Herrera'
     }];
 
