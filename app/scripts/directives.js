@@ -30,6 +30,18 @@ angular
         }
     };
 })
+.directive('mobileExtraMenu', function ($window) {
+    return {
+        restrict: 'A',
+        link: function(scope, elem){
+            // copy all extra menu and add to mobile container
+
+            var xHeight = $window.innerHeight - 230;
+            if (xHeight < 300) { xHeight = $window.innerHeight; }
+            elem.css('min-height', xHeight+'px');
+        }
+    };
+})
 .directive('pikaday', function () {
     return {
         restrict: 'C',
@@ -103,12 +115,16 @@ angular
         link: function(scope, elem){
             elem.bind('click', function(){
                 var parent = jQuery(elem).parent();
+                parent.toggleClass('active');
+                var checkbox = parent.find('input[type="checkbox"]');
+                if (checkbox) { checkbox.prop('checked', parent.hasClass('active')); }
                 jQuery(parent).find('.detail').toggleClass('active')
                             .prev().find('span')
                                    .toggleClass('glyphicon-minus')
                                    .toggleClass('glyphicon-plus');
 
                 var siblings = jQuery(parent).siblings();
+                siblings.removeClass('active');
                 for (var i = 0; i < siblings.length; i++) {
                     jQuery(siblings[i]).find('.detail').removeClass('active')
                                        .prev().find('span')

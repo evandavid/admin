@@ -5,6 +5,16 @@ body {
   overflow-x: hidden;
 }
 
+@media print {
+  .modal-dialog {
+    display: block;
+  }
+
+  .body {
+    display: none;
+  }
+}
+
 nav {
   position: fixed;
   top: 0;
@@ -51,8 +61,8 @@ nav {
   }
 
   .menu {
-    padding: 18px 5px 18px 10px;
-    float: left;
+    padding: 18px 15px 18px 10px;
+    // float: left;
     i.fa-outdent {
       cursor: pointer;
     }
@@ -349,6 +359,18 @@ nav {
               background: #EFF2F9;
               .detail {
                 background: #fff;
+              }
+            }
+            &.active {
+              &:hover {
+                background: $table_highlight_background;
+              }
+              background: $table_highlight_background;
+              color: $table_highlight_color;
+
+              .detail {
+                background: #ffffff;
+                color: #333333;
               }
             }
           }
