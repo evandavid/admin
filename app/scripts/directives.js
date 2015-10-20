@@ -30,15 +30,22 @@ angular
         }
     };
 })
-.directive('mobileExtraMenu', function ($window) {
+.directive('mobileExtraMenu', function ($compile) {
     return {
         restrict: 'A',
         link: function(scope, elem){
             // copy all extra menu and add to mobile container
+            var extramenus = function(){
+                var theMenu = jQuery('.extra-menus').clone();
+                console.log(theMenu);
+                elem.html('');
+                elem.html($compile(theMenu)(scope));
+                return theMenu;
+            };
 
-            var xHeight = $window.innerHeight - 230;
-            if (xHeight < 300) { xHeight = $window.innerHeight; }
-            elem.css('min-height', xHeight+'px');
+            // jQuery('.extra-menus-container').bind('DOMSubtreeModified', function(){
+                extramenus();
+            // }); 
         }
     };
 })

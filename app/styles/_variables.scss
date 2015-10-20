@@ -8,8 +8,10 @@ $header_background: #fff;
 $header_title_background: #fff;
 $header_title_color: #2c3e50;
 
-$sidebar_background: #2c3e50;
+$sidebar_background: lighten(#2c3e50, 15%);
 $sidebar_color: #ffffff;
 
-$table_highlight_background: #2c3e50;
-$table_highlight_color: #ffffff;
+$extra_menu_color: #2c3e50;
+
+$table_highlight_background: lighten(#2c3e50, 60%);
+$table_highlight_color: #333;

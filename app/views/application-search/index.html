@@ -1,5 +1,5 @@
 <div class="row body">
-  <div class="col-lg-2 col-md-3 col-sm-4 left-content">
+  <div class="col-lg-2 col-md-3 col-sm-4 left-content extra-menus-container">
     <div class="extra-menus">
       <div class="item header">Filters</div>
       <div class="item btn" >New Filter</div>
@@ -17,7 +17,7 @@
 
     <div class="extra-menus">
       <div class="item header">Favorite Filters</div>
-      <div class="item">Custom Filter</div>
+      <div class="item" x-ng-repeat="filter in vm.filters">{{filter}}</div>
     </div>
 
     <div class="extra-menus">
@@ -62,11 +62,11 @@
         <div dropdown-search data="vm.usersList" ng-model="vm.filter.users" ></div>
       </div>
       <div class="item action filter-item">
-      <label>&nbsp;</label>
+        <label>&nbsp;</label>
         <button><span aria-hidden="true" class="glyphicon glyphicon-plus"></span></button>        
       </div>
       <div class="item action filter-item">
-      <label>&nbsp;</label>
+        <label>&nbsp;</label>
         <button><span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>        
       </div>
     </div>
@@ -98,7 +98,7 @@
             </div>
           </div>
           <!-- this is table body -->
-          <div  class="row rows" ng-repeat="n in [] | range:100">
+          <div  class="row rows" ng-repeat="n in [] | range:10">
             <div x-table-row class="col-xs-4">
               <div class="row">
                 <div class="col-xs-2">
