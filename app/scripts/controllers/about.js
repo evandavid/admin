@@ -8,8 +8,17 @@
  * Controller of the simplefiAdminApp
  */
 angular.module('simplefiAdminApp')
-  .controller('ApplicationSearchCtrl', function () {
+  .controller('ApplicationSearchCtrl', function (Restangular) {
     var vm = this;
+
+    vm.testLogin = function(){
+        Restangular.one('Login').customPOST({model: {Email: 'admin@simplefinow.com', Password: 'admin'}}, null, {}, {})
+        .then(function(res){
+            // console.log(res.status);
+        }, function(err){
+            console.log(err);
+        })
+    };
 
     vm.yesNo = [{
     	id: true,

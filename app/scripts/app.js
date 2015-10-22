@@ -16,9 +16,14 @@ angular
     'ui.router',
     'ngSanitize',
     'ngTouch',
-    'simplefiAdminApp.global.directives'
+    'simplefiAdminApp.global.directives',
+    'restangular'
   ])
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, RestangularProvider, $httpProvider) {
+    RestangularProvider.setBaseUrl('http://localhost:51944');
+
+    // $httpProvider.interceptors.push('APIInterceptor');
+
     $urlRouterProvider.otherwise('/application-search');
     $urlRouterProvider.when('', '/application-search');
 
@@ -55,3 +60,12 @@ angular
           controller: 'RequestinfoCtrl'
         });
   });
+  // .service('APIInterceptor', function($rootScope, $q, $injector) {
+  //   var service = this;
+
+  //   service.responseError = function(rejection) {
+  //     console.log(rejection);
+     
+  //     return $q.reject(rejection);
+  //   };
+  // });
